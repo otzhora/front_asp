@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <h1>Список пользователей</h1>
+    <v-toolbar color="cyan" dark>
+      <h1>Список пользователей</h1>
+    </v-toolbar>
+
     <TableComponent/>
   </div>
 </template>
@@ -17,3 +20,10 @@ export default {
   }
 };
 </script>
+
+<style>
+body {
+  background-color: rgb(228, 238, 255);
+}
+</style>
+

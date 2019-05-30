@@ -1,36 +1,42 @@
 <template>
   <div class="container">
     <!-- -->
-    <div class="create_user">
-      <label for="create-name">Имя:</label>
-      <input type="text" name="create_name" v-model="name">
+    <v-app id="inspire">
+      <div class="create_user">
+        <label for="create-name">Имя:</label>
+        <input type="text" name="create_name" v-model="name">
 
-      <label for="create-id">id:</label>
-      <input type="text" name="create_id" v-model="id">
+        <label for="create-id">id:</label>
+        <input type="text" name="create_id" v-model="id">
 
-      <label for="create-name">Адрес:</label>
-      <input type="text" name="create_adress" v-model="adress">
+        <label for="create-name">Адрес:</label>
+        <input type="text" name="create_adress" v-model="adress">
 
-      <button v-on:click="createUser">Добавить пользователя</button>
-    </div>
-
-    <hr>
-
-    <div class="delete_user">
-      <label for="create-name">Введите id:</label>
-      <input type="text" name="create_name" v-model="delete_id">
-
-      <button v-on:click="deleteUser">Удалить пользователя</button>
-    </div>
-    <hr>
-
-    <p v-if="err">{{err}}</p>
-    <div class="user-container">
-      <div class="user" v-for="user in users" v-bind:key="user.id">
-        <p class="name">{{user.name}}</p>
-        <p class="id">{{user.id}}</p>
+        <v-btn flat small v-on:click="createUser">Добавить пользователя</v-btn>
       </div>
-    </div>
+
+      <hr>
+
+      <div class="delete_user">
+        <label for="create-name">Введите id:</label>
+        <input type="text" name="create_name" v-model="delete_id">
+
+        <v-btn flat small v-on:click="deleteUser">Удалить пользователя</v-btn>
+      </div>
+      <hr>
+
+      <p v-if="err">{{err}}</p>
+
+      <v-data-table :headers="headers" :items="users">
+        <template sclot="headerCell" slot-scope="props">
+          <span>{{props.header.text}}</span>
+        </template>
+        <template v-slot:items="props">
+          <td>{{ props.item.name }}</td>
+          <td>{{ props.item.id }}</td>
+        </template>
+      </v-data-table>
+    </v-app>
   </div>
 </template>
 
@@ -45,7 +51,8 @@ export default {
       name: "",
       id: "",
       adress: "",
-      delete_id: ""
+      delete_id: "",
+      headers: [{ text: "name" }, { text: "id" }]
     };
   },
   async created() {
