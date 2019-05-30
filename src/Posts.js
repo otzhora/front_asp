@@ -10,7 +10,9 @@ class Service {
   }
 
   static addUser(userData) {
-    return axios.post(url, userData);
+    return axios.post(url, userData, {
+      headers: { "Access-Control-Allow-Origin": "*" }
+    });
   }
 
   static deleteUser(id) {
